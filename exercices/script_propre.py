@@ -1,23 +1,47 @@
 import unittest
+from typing import List
 
-"""
-Count names with more than seven letters
-"""
-def names(prenoms):
-    more_than_seven = 0
-    for prenom in prenoms:
-        if len(prenom) > 7:
-            more_than_seven += 1
-            print(prenom + " est un prénom avec un nombre de lettres supérieur à 7")
-        else:
-            print(prenom + " est un prénom avec un nombre de lettres inférieur ou égal à 7")
-    return more_than_seven
+# Constante définissant le seuil minimal de lettres
+MINIMUM_LETTERS_THRESHOLD: int = 7
 
-class TestNamesMethod(unittest.TestCase):
-     def test_names(self):
-        prenoms = ["Guillaume", "Gilles", "Juliette", "Antoine", "François", "Cassandre"]
-        more_than_seven = names(prenoms=prenoms)
-        self.assertEqual(more_than_seven, 4)
+def count_names_longer_than_threshold(first_names: List[str]) -> int:
+    """
+    Compte le nombre de prénoms dont la longueur
+    est strictement supérieure au seuil défini.
+    """
+
+    count: int = 0
+
+    for first_name in first_names:
+
+        # Vérifie si le prénom dépasse le seuil
+        if len(first_name) > MINIMUM_LETTERS_THRESHOLD:
+            count += 1
+
+    return count
+
+
+class TestCountNamesLongerThanThreshold(unittest.TestCase):
+
+    def test_should_count_names_with_more_than_seven_letters(self) -> None:   
+        """
+        Vérifie que la fonction retourne bien
+        le nombre attendu de prénoms > 7 lettres.
+        """
+
+        first_names: List[str] = [
+            "Guillaume",
+            "Gilles",
+            "Juliette",
+            "Antoine",
+            "François",
+            "Cassandre"
+        ]
+
+        result: int = count_names_longer_than_threshold(first_names)
+
+        # Vérification du résultat attendu
+        self.assertEqual(result, 4)         #4 car Guillaume ; Juliette ; François ; Cassandre
 
 if __name__ == '__main__':
     unittest.main()
