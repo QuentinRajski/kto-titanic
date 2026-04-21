@@ -77,7 +77,7 @@ class ChatbotAgent:
         )
 
         async def chat_async(self, message: str) -> str:
-        """Chat async utilisant l'adaptateur MCP Langchain officiel."""
+            """Chat async utilisant l'adaptateur MCP Langchain officiel."""
             with tracer.start_as_current_span("chatbot.chat") as span:
                 span.set_attribute("user.message.length", len(message))
 
