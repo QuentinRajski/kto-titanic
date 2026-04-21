@@ -42,8 +42,6 @@ class ChatbotAgent:
 
     async def chat_async(self, message: str) -> str:
         """Chat async utilisant l'adaptateur MCP Langchain officiel."""
- async def chat_async(self, message: str) -> str:
-        """Chat async utilisant l'adaptateur MCP Langchain officiel."""
         mcp_client = MultiServerMCPClient(self.mcp_connections)  # type: ignore
 
         tools = await mcp_client.get_tools()
