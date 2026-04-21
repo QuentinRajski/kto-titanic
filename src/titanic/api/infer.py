@@ -22,9 +22,7 @@ from opentelemetry.sdk.resources import Resource
 from titanic.api.auth import verify_token
 
 
-JAEGER_ENDPOINT = os.getenv("JAEGER_ENDPOINT",   env:
-    - name: JAEGER_ENDPOINT
-      value: "http://jaeger.gthomas59800-dev.svc.cluster.local:4318/v1/traces")
+JAEGER_ENDPOINT = os.getenv("JAEGER_ENDPOINT", "http://jaeger.rajski-quentin-dev.svc.cluster.local:4318/v1/traces")
 
 # TODO : Intégrer les configurations d'OTEL et instancier le tracer. Peut être fait plus tard si le cours
 # sur l'observabilité n'est pas encore donné
@@ -39,8 +37,6 @@ tracer = trace.get_tracer(__name__)
 
 app = FastAPI()
 FastAPIInstrumentor.instrument_app(app)
-
-app = FastAPI()
 
 with open("./src/titanic/api/resources/model.pkl", "rb") as f:
     model = pickle.load(f)
